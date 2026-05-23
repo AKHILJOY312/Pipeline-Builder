@@ -1,6 +1,7 @@
 // features/pipeline/components/SubmitButton.jsx
 import { useState } from "react";
 import { useReactFlow } from "reactflow";
+import { toast } from "react-hot-toast";
 import { submitPipelineTopology } from "../services/pipelineApi";
 
 export const SubmitButton = () => {
@@ -20,12 +21,35 @@ export const SubmitButton = () => {
         activeEdges,
       );
 
-      alert(
-        `Pipeline Topology Analysis Successfully Processed!\n\n` +
-          `• Total Nodes Parsed: ${num_nodes}\n` +
-          `• Total Connected Edges: ${num_edges}\n` +
-          `• Valid Graph Topology (DAG): ${is_dag ? "✔️ TRUE" : "❌ FALSE (Cyclic Loop Detected)"}`,
-      );
+      // Render a highly styled structural breakdown using inline JSX inside the toast
+      toast.success(
+        () => (
+          <div className="flex flex-col gap-1 text-xs text-gray-700">
+            <span className="font-bold text-emerald-600 text-sm mb-1">
+              Pipeline Analysis Complete!
+            </span>
+            <div>
+              • Total Nodes Parsed:{" "}
+              <span className="font-semibold">{num_nodes}</span>
+            </div>
+            <div>
+              • Total Connected Edges:{" "}
+              <span className="font-semibold">{num_edges}</span>
+            </div>
+            <div className="mt-1 font-medium flex items-center gap-1">
+              • Topology Check:
+              {is_dag ? (
+                <span className="text-emerald-600 font-bold">✔️ Valid DAG</span>
+              ) : (
+                <span className="text-red-500 font-bold">
+                  ❌ Cyclic Loop Detected
+                </span>
+              )}
+            </div>
+          </div>
+        ),
+        { duration: 6000 },
+      ); // Kept open longer so users can read metrics comfortably
     } catch (error) {
       console.error("Pipeline processing crash:", error);
 
@@ -34,7 +58,8 @@ export const SubmitButton = () => {
         error.message ||
         "Could not establish connection with FastAPI engine.";
 
-      alert(`Pipeline Processing Failed:\n${errorMessage}`);
+      // Display clean error popup
+      toast.error(`Submission Failed: ${errorMessage}`, { duration: 4000 });
     } finally {
       setIsSubmitting(false);
     }
