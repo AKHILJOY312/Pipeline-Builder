@@ -1,6 +1,6 @@
-import { PipelineToolbar } from "./features/pipeline/components/toolbar";
+import { PipelineToolbar } from "./features/pipeline/components/Toolbar";
 import { PipelineUI } from "./features/pipeline/canvas/PipelineUI";
-import { SubmitButton } from "./features/pipeline/components/Submit";
+import { SubmitButton } from "./features/pipeline/components/SubmitButton";
 import { ReactFlowProvider } from "reactflow";
 function App() {
   return (
