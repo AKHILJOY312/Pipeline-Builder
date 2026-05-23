@@ -1,5 +1,5 @@
-import axios from "axios";
 import { API_ROUTES } from "../../../shared/constants/apiRoutes";
+import { apiClient } from "../../../shared/services/apiClient";
 
 export const submitPipelineTopology = async (nodes, edges) => {
   if (!nodes?.length) {
@@ -19,9 +19,7 @@ export const submitPipelineTopology = async (nodes, edges) => {
     })),
   };
 
-  const { data } = await axios.post(API_ROUTES.PIPELINES.PARSE, payload, {
-    headers: { "Content-Type": "application/json" },
-  });
+  const { data } = await apiClient.post(API_ROUTES.PIPELINES.PARSE, payload);
 
   return data;
 };
