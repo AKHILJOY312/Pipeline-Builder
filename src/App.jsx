@@ -4,10 +4,12 @@ import { SubmitButton } from "./features/pipeline/components/submit";
 
 function App() {
   return (
-    <div>
-      <PipelineToolbar />
-      <PipelineUI />
-      <SubmitButton />
+    <div className="app-shell">
+      <div className="app-panel">
+        <PipelineToolbar />
+        <PipelineUI />
+        <SubmitButton />
+      </div>
     </div>
   );
 }

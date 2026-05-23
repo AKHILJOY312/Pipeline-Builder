@@ -13,13 +13,13 @@ export const DelayNode = ({ id, data }) => {
       outputs={[{ id: `${id}-output` }]}
     >
       <div>
-        <label>
-          Timeout (ms):
+        <label className="field-wrap">
+          <span className="field-label">Timeout (ms)</span>
           <input
+            className="field-input"
             type="number"
             value={delayTime}
             onChange={(e) => updateNodeField(id, "delayTime", e.target.value)}
-            style={{ width: "100%", boxSizing: "border-box" }}
           />
         </label>
       </div>

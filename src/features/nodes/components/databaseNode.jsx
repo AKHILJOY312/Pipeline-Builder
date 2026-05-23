@@ -13,9 +13,10 @@ export const DatabaseNode = ({ id, data }) => {
       outputs={[{ id: `${id}-result` }]}
     >
       <div>
-        <label>
-          Operation:
+        <label className="field-wrap">
+          <span className="field-label">Operation</span>
           <select
+            className="field-input"
             value={operation}
             onChange={(e) => updateNodeField(id, "operation", e.target.value)}
           >

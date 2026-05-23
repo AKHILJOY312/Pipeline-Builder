@@ -8,31 +8,12 @@ export const BaseNode = ({
   outputs = [],
 }) => {
   return (
-    <div
-      style={{
-        width: 200,
-        minHeight: 80,
-        border: "1px solid black",
-        backgroundColor: "#fff",
-        borderRadius: "4px",
-        position: "relative",
-      }}
-    >
-      {/* Node Header Layout */}
-      <div
-        style={{
-          borderBottom: "1px solid #ccc",
-          padding: "5px",
-          fontWeight: "bold",
-          backgroundColor: "#f3f4f6",
-        }}
-      >
+    <div className="node-card">
+      <div className="node-head">
         <span>{title}</span>
       </div>
 
-      {/* Target/Input Handles (Left Side Defaults) */}
       {inputs.map((input, idx) => {
-        // Fallback calculation handles vertical distribution if top isn't explicitly configured
         const topStyle =
           input.style?.top || `${((idx + 1) * 100) / (inputs.length + 1)}%`;
         return (
@@ -46,10 +27,8 @@ export const BaseNode = ({
         );
       })}
 
-      {/* Node Core Body */}
-      <div style={{ padding: "10px" }}>{children}</div>
+      <div className="node-body">{children}</div>
 
-      {/* Source/Output Handles (Right Side Defaults) */}
       {outputs.map((output, idx) => {
         const topStyle =
           output.style?.top || `${((idx + 1) * 100) / (outputs.length + 1)}%`;

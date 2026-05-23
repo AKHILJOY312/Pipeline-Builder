@@ -13,9 +13,10 @@ export const TextNode = ({ id, data }) => {
       outputs={[{ id: `${id}-output`, position: Position.Right }]}
     >
       <div>
-        <label>
-          Text:
+        <label className="field-wrap">
+          <span className="field-label">Text</span>
           <input
+            className="field-input"
             type="text"
             value={currText}
             onChange={(e) => updateNodeField(id, "text", e.target.value)}

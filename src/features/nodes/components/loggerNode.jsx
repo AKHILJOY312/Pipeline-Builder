@@ -13,9 +13,10 @@ export const LoggerNode = ({ id, data }) => {
       outputs={[{ id: `${id}-passthrough` }]}
     >
       <div>
-        <label>
-          Severity:
+        <label className="field-wrap">
+          <span className="field-label">Severity</span>
           <select
+            className="field-input"
             value={logLevel}
             onChange={(e) => updateNodeField(id, "logLevel", e.target.value)}
           >

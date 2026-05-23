@@ -15,17 +15,19 @@ export const OutputNode = ({ id, data }) => {
       inputs={[{ id: `${id}-value`, position: Position.Left }]}
     >
       <div>
-        <label style={{ display: "block", marginBottom: "4px" }}>
-          Name:
+        <label className="field-wrap">
+          <span className="field-label">Name</span>
           <input
+            className="field-input"
             type="text"
             value={currName}
             onChange={(e) => updateNodeField(id, "outputName", e.target.value)}
           />
         </label>
-        <label style={{ display: "block" }}>
-          Type:
+        <label className="field-wrap">
+          <span className="field-label">Type</span>
           <select
+            className="field-input"
             value={outputType}
             onChange={(e) => updateNodeField(id, "outputType", e.target.value)}
           >

@@ -13,9 +13,10 @@ export const FilterNode = ({ id, data }) => {
       outputs={[{ id: `${id}-true` }, { id: `${id}-false` }]}
     >
       <div>
-        <label>
-          Condition:
+        <label className="field-wrap">
+          <span className="field-label">Condition</span>
           <select
+            className="field-input"
             value={condition}
             onChange={(e) => updateNodeField(id, "condition", e.target.value)}
           >

@@ -11,7 +11,7 @@ export const LLMNode = ({ id, data }) => {
 
   return (
     <BaseNode id={id} title="LLM" inputs={inputs} outputs={outputs}>
-      <div style={{ fontSize: "12px" }}>
+      <div className="text-[11px] leading-4 text-[var(--color-muted)]">
         <span>
           This is an LLM block. Handles system configs and context prompts.
         </span>

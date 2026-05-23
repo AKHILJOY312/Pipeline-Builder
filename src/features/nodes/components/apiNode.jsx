@@ -15,9 +15,10 @@ export const APINode = ({ id, data }) => {
       outputs={[{ id: `${id}-response` }, { id: `${id}-error` }]}
     >
       <div>
-        <label style={{ display: "block", marginBottom: "4px" }}>
-          Method:
+        <label className="field-wrap">
+          <span className="field-label">Method</span>
           <select
+            className="field-input"
             value={method}
             onChange={(e) => updateNodeField(id, "method", e.target.value)}
           >
@@ -27,13 +28,13 @@ export const APINode = ({ id, data }) => {
             <option value="DELETE">DELETE</option>
           </select>
         </label>
-        <label style={{ display: "block" }}>
-          Endpoint:
+        <label className="field-wrap">
+          <span className="field-label">Endpoint</span>
           <input
+            className="field-input"
             type="text"
             value={url}
             onChange={(e) => updateNodeField(id, "url", e.target.value)}
-            style={{ width: "100%", boxSizing: "border-box" }}
           />
         </label>
       </div>
