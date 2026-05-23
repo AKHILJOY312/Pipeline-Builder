@@ -1,5 +1,5 @@
 import { PipelineToolbar } from "./features/pipeline/components/toolbar";
-import { PipelineUI } from "./features/pipeline/canvas/ui";
+import { PipelineUI } from "./features/pipeline/canvas/PipelineUI";
 import { SubmitButton } from "./features/pipeline/components/submit";
 
 function App() {

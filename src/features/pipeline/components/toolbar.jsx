@@ -1,21 +1,15 @@
-// toolbar.js
+// toolbar.jsx
 
-import { DraggableNode } from "../../nodes/components/draggableNode";
+import { DraggableNode } from "../../nodes/components/node-card/DraggableNode";
+import { toolbarNodes } from "../../nodes/registry/toolbarNodes";
 
 export const PipelineToolbar = () => {
   return (
     <div>
       <div className="toolbar-grid">
-        <DraggableNode type="customInput" label="Input" />
-        <DraggableNode type="llm" label="LLM" />
-        <DraggableNode type="customOutput" label="Output" />
-        <DraggableNode type="text" label="Text" />
-
-        <DraggableNode type="apiNode" label="API Request" />
-        <DraggableNode type="delayNode" label="Delay" />
-        <DraggableNode type="filterNode" label="Filter" />
-        <DraggableNode type="loggerNode" label="Logger" />
-        <DraggableNode type="databaseNode" label="Database" />
+        {toolbarNodes.map((node) => (
+          <DraggableNode key={node.type} type={node.type} label={node.label} />
+        ))}
       </div>
     </div>
   );

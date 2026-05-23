@@ -1,43 +1,17 @@
-// ui.js - Updated Structure
-// Displays the drag-and-drop UI
-// --------------------------------------------------
-
 import { useState, useRef, useCallback } from "react";
 import ReactFlow, { Controls, Background, MiniMap } from "reactflow";
 import { useStore } from "../../../shared/store/store";
-import { InputNode } from "../../nodes/components/inputNode";
-import { LLMNode } from "../../nodes/components/llmNode";
-import { OutputNode } from "../../nodes/components/outputNode";
-import { TextNode } from "../../nodes/components/textNode";
-import { APINode } from "../../nodes/components/apiNode";
-import { DelayNode } from "../../nodes/components/delayNode";
-import { FilterNode } from "../../nodes/components/filterNode";
-import { LoggerNode } from "../../nodes/components/loggerNode";
-import { DatabaseNode } from "../../nodes/components/databaseNode";
+import { nodeTypes } from "../../nodes/registry/nodeTypes";
 
 import "reactflow/dist/style.css";
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
 
-// FIX #1: Defined nodeTypes OUTSIDE the component to prevent re-creation warnings
-const nodeTypes = {
-  customInput: InputNode,
-  llm: LLMNode,
-  customOutput: OutputNode,
-  text: TextNode,
-  apiNode: APINode,
-  delayNode: DelayNode,
-  filterNode: FilterNode,
-  loggerNode: LoggerNode,
-  databaseNode: DatabaseNode,
-};
-
 export const PipelineUI = () => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
-  // FIX #3: Replace the macro selector with clean, atomic selectors to eliminate the shallow warning
   const nodes = useStore((state) => state.nodes);
   const edges = useStore((state) => state.edges);
   const getNodeID = useStore((state) => state.getNodeID);
@@ -68,7 +42,6 @@ export const PipelineUI = () => {
           return;
         }
 
-        // FIX #2: Use modern screenToFlowPosition instead of deprecated project logic
         const position = reactFlowInstance.screenToFlowPosition({
           x: event.clientX,
           y: event.clientY,

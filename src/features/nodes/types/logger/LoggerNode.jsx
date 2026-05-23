@@ -1,0 +1,32 @@
+import { useStore } from "../../../../shared/store/store";
+import { BaseNode } from "../../components/base/BaseNode";
+
+export const LoggerNode = ({ id, data }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
+  const logLevel = data?.logLevel || "info";
+
+  return (
+    <BaseNode
+      id={id}
+      nodeType="loggerNode"
+      title="Logger"
+      inputs={[{ id: `${id}-log-data` }]}
+      outputs={[{ id: `${id}-passthrough` }]}
+    >
+      <div>
+        <label className="field-wrap">
+          <span className="field-label">Severity</span>
+          <select
+            className="field-input"
+            value={logLevel}
+            onChange={(e) => updateNodeField(id, "logLevel", e.target.value)}
+          >
+            <option value="info">INFO</option>
+            <option value="warn">WARN</option>
+            <option value="error">ERROR</option>
+          </select>
+        </label>
+      </div>
+    </BaseNode>
+  );
+};
