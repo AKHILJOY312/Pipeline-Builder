@@ -35,5 +35,8 @@ const iconByTitle = {
   Database: Database,
 };
 
-export const getNodeIcon = (nodeType, title) =>
-  iconByType[nodeType] || iconByTitle[title] || Braces;
+// Turn this into a proper, PascalCase React Component
+export const NodeIcon = ({ nodeType, title, size = 14 }) => {
+  const IconComponent = iconByType[nodeType] || iconByTitle[title] || Braces;
+  return <IconComponent size={size} />;
+};

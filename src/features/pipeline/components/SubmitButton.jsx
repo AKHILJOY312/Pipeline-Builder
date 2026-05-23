@@ -89,7 +89,7 @@ export const SubmitButton = () => {
         {isSubmitting ? "Processing Graph..." : "Submit Pipeline"}
       </button>
 
-      <div className="text-center min-h-[20px] mt-2">
+      <div className="text-center min-h-5 mt-2">
         {statusMessage && (
           <p
             className="text-xs text-slate-600 animate-pulse"

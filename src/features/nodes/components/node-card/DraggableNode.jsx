@@ -1,4 +1,5 @@
-import { getNodeIcon } from "../base/nodeIcons";
+// Import the component variant instead
+import { NodeIcon } from "../base/nodeIcons";
 
 export const DraggableNode = ({ type, label }) => {
   const onDragStart = (event, nodeType) => {
@@ -9,7 +10,6 @@ export const DraggableNode = ({ type, label }) => {
     );
     event.dataTransfer.effectAllowed = "move";
   };
-  const Icon = getNodeIcon(type, label);
 
   return (
     <div
@@ -17,7 +17,8 @@ export const DraggableNode = ({ type, label }) => {
       onDragStart={(event) => onDragStart(event, type)}
       draggable
     >
-      <Icon size={16} />
+      {/* Pass props straight to the custom Icon component */}
+      <NodeIcon nodeType={type} title={label} size={16} />
       <span>{label}</span>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Handle, Position } from "reactflow";
 import { X } from "lucide-react";
 import { useStore } from "../../../../shared/store/store";
-import { getNodeIcon } from "./nodeIcons";
+import { NodeIcon } from "./nodeIcons";
 
 export const BaseNode = ({
   id,
@@ -12,14 +12,12 @@ export const BaseNode = ({
   outputs = [],
 }) => {
   const removeNode = useStore((state) => state.removeNode);
-  const Icon = getNodeIcon(nodeType, title);
 
   return (
     <div className="node-card">
       <div className="node-head">
         <span className="flex items-center gap-1.5">
-          <Icon size={14} />
-          {title}
+          <NodeIcon nodeType={nodeType} title={title} size={14} /> {title}
         </span>
         <button
           type="button"

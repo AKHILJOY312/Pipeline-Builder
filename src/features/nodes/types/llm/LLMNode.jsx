@@ -1,7 +1,7 @@
 import { Position } from "reactflow";
 import { BaseNode } from "../../components/base/BaseNode";
 
-export const LLMNode = ({ id, data }) => {
+export const LLMNode = ({ id }) => {
   const inputs = [
     { id: `${id}-system`, position: Position.Left, style: { top: "33%" } },
     { id: `${id}-prompt`, position: Position.Left, style: { top: "66%" } },
@@ -10,7 +10,13 @@ export const LLMNode = ({ id, data }) => {
   const outputs = [{ id: `${id}-response`, position: Position.Right }];
 
   return (
-    <BaseNode id={id} nodeType="llm" title="LLM" inputs={inputs} outputs={outputs}>
+    <BaseNode
+      id={id}
+      nodeType="llm"
+      title="LLM"
+      inputs={inputs}
+      outputs={outputs}
+    >
       <div className="text-[11px] leading-4 text-muted">
         <span>
           This is an LLM block. Handles system configs and context prompts.
