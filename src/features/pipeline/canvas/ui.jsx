@@ -9,6 +9,11 @@ import { InputNode } from "../../nodes/components/inputNode";
 import { LLMNode } from "../../nodes/components/llmNode";
 import { OutputNode } from "../../nodes/components/outputNode";
 import { TextNode } from "../../nodes/components/textNode";
+import { APINode } from "../../nodes/components/apiNode";
+import { DelayNode } from "../../nodes/components/delayNode";
+import { FilterNode } from "../../nodes/components/filterNode";
+import { LoggerNode } from "../../nodes/components/loggerNode";
+import { DatabaseNode } from "../../nodes/components/databaseNode";
 
 import "reactflow/dist/style.css";
 
@@ -21,6 +26,11 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  apiNode: APINode,
+  delayNode: DelayNode,
+  filterNode: FilterNode,
+  loggerNode: LoggerNode,
+  databaseNode: DatabaseNode,
 };
 
 export const PipelineUI = () => {
