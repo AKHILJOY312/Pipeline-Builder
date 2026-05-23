@@ -10,8 +10,8 @@ export const LLMNode = ({ id, data }) => {
   const outputs = [{ id: `${id}-response`, position: Position.Right }];
 
   return (
-    <BaseNode id={id} title="LLM" inputs={inputs} outputs={outputs}>
-      <div className="text-[11px] leading-4 text-[var(--color-muted)]">
+    <BaseNode id={id} nodeType="llm" title="LLM" inputs={inputs} outputs={outputs}>
+      <div className="text-[11px] leading-4 text-muted">
         <span>
           This is an LLM block. Handles system configs and context prompts.
         </span>

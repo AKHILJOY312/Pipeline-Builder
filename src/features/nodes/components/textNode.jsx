@@ -9,6 +9,7 @@ export const TextNode = ({ id, data }) => {
   return (
     <BaseNode
       id={id}
+      nodeType="text"
       title="Text"
       outputs={[{ id: `${id}-output`, position: Position.Right }]}
     >

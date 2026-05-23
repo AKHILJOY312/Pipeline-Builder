@@ -8,6 +8,7 @@ export const FilterNode = ({ id, data }) => {
   return (
     <BaseNode
       id={id}
+      nodeType="filterNode"
       title="Filter"
       inputs={[{ id: `${id}-data` }]}
       outputs={[{ id: `${id}-true` }, { id: `${id}-false` }]}

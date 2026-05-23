@@ -8,6 +8,7 @@ export const LoggerNode = ({ id, data }) => {
   return (
     <BaseNode
       id={id}
+      nodeType="loggerNode"
       title="Logger"
       inputs={[{ id: `${id}-log-data` }]}
       outputs={[{ id: `${id}-passthrough` }]}

@@ -36,7 +36,7 @@
   }
 
   .app-panel {
-    @apply rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-sm;
+    @apply rounded-2xl border border-border bg-surface p-4 shadow-sm;
   }
 
   .toolbar-grid {
@@ -44,11 +44,11 @@
   }
 
   .drag-node {
-    @apply flex h-16 min-w-24 cursor-grab flex-col items-center justify-center rounded-lg bg-[var(--color-brand)] px-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 active:cursor-grabbing;
+    @apply flex h-16 min-w-24 cursor-grab flex-col items-center justify-center gap-1 rounded-lg bg-brand px-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 active:cursor-grabbing;
   }
 
   .canvas-shell {
-    @apply mt-4 h-[70vh] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm;
+    @apply mt-4 h-[70vh] w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm;
   }
 
   .submit-shell {
@@ -56,15 +56,15 @@
   }
 
   .btn-primary {
-    @apply rounded-lg bg-[var(--color-brand)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--color-brand-strong)];
+    @apply rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-strong;
   }
 
   .node-card {
-    @apply relative w-[220px] min-h-20 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm;
+    @apply relative w-55 min-h-20 overflow-hidden rounded-lg border border-border bg-surface shadow-sm;
   }
 
   .node-head {
-    @apply border-b border-[var(--color-border)] bg-[var(--color-surface-soft)] px-2.5 py-1.5 text-sm font-semibold;
+    @apply flex items-center justify-between border-b border-border bg-surface-soft px-2.5 py-1.5 text-sm font-semibold;
   }
 
   .node-body {
@@ -76,10 +76,10 @@
   }
 
   .field-label {
-    @apply block text-[11px] font-medium uppercase tracking-wide text-[var(--color-muted)];
+    @apply block text-[11px] font-medium uppercase tracking-wide text-muted;
   }
 
   .field-input {
-    @apply w-full rounded-md border border-[var(--color-border)] bg-white px-2 py-1.5 text-xs outline-none ring-0 transition focus:border-slate-500;
+    @apply w-full rounded-md border border-border bg-white px-2 py-1.5 text-xs outline-none ring-0 transition focus:border-slate-500;
   }
 }

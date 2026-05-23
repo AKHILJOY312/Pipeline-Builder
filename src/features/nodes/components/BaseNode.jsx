@@ -1,16 +1,35 @@
 import { Handle, Position } from "reactflow";
+import { X } from "lucide-react";
+import { useStore } from "../../../shared/store/store";
+import { getNodeIcon } from "./nodeIcons";
 
 export const BaseNode = ({
   id,
+  nodeType,
   title,
   children,
   inputs = [],
   outputs = [],
 }) => {
+  const removeNode = useStore((state) => state.removeNode);
+  const Icon = getNodeIcon(nodeType, title);
+
   return (
     <div className="node-card">
       <div className="node-head">
-        <span>{title}</span>
+        <span className="flex items-center gap-1.5">
+          <Icon size={14} />
+          {title}
+        </span>
+        <button
+          type="button"
+          onClick={() => removeNode(id)}
+          className="rounded-sm px-1 text-xs leading-none text-[var(--color-muted)] transition hover:bg-slate-200 hover:text-slate-900"
+          aria-label={`Close ${title} node`}
+          title="Remove node"
+        >
+          <X size={12} />
+        </button>
       </div>
 
       {inputs.map((input, idx) => {

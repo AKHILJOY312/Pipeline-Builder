@@ -8,6 +8,7 @@ export const DatabaseNode = ({ id, data }) => {
   return (
     <BaseNode
       id={id}
+      nodeType="databaseNode"
       title="Database"
       inputs={[{ id: `${id}-document` }]}
       outputs={[{ id: `${id}-result` }]}

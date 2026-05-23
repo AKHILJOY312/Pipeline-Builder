@@ -8,6 +8,7 @@ export const DelayNode = ({ id, data }) => {
   return (
     <BaseNode
       id={id}
+      nodeType="delayNode"
       title="Delay"
       inputs={[{ id: `${id}-input` }]}
       outputs={[{ id: `${id}-output` }]}

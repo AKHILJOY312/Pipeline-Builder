@@ -10,6 +10,7 @@ export const APINode = ({ id, data }) => {
   return (
     <BaseNode
       id={id}
+      nodeType="apiNode"
       title="API Request"
       inputs={[{ id: `${id}-trigger` }, { id: `${id}-payload` }]}
       outputs={[{ id: `${id}-response` }, { id: `${id}-error` }]}

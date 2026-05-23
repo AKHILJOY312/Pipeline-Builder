@@ -11,6 +11,7 @@ export const OutputNode = ({ id, data }) => {
   return (
     <BaseNode
       id={id}
+      nodeType="customOutput"
       title="Output"
       inputs={[{ id: `${id}-value`, position: Position.Left }]}
     >
