@@ -1,47 +1,40 @@
-// inputNode.js
-
-import { useState } from 'react';
-import { Handle, Position } from 'reactflow';
+import { Position } from "reactflow";
+import { useStore } from "../../../shared/store/store";
+import { BaseNode } from "./BaseNode";
 
 export const InputNode = ({ id, data }) => {
-  const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
-  const [inputType, setInputType] = useState(data.inputType || 'Text');
+  const updateNodeField = useStore((state) => state.updateNodeField);
 
-  const handleNameChange = (e) => {
-    setCurrName(e.target.value);
-  };
-
-  const handleTypeChange = (e) => {
-    setInputType(e.target.value);
-  };
+  // Read clean defaults or live data directly from global store
+  const currName = data?.inputName || id.replace("customInput-", "input_");
+  const inputType = data?.inputType || "Text";
 
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
+    <BaseNode
+      id={id}
+      title="Input"
+      outputs={[{ id: `${id}-value`, position: Position.Right }]}
+    >
       <div>
-        <span>Input</span>
-      </div>
-      <div>
-        <label>
+        <label style={{ display: "block", marginBottom: "4px" }}>
           Name:
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={handleNameChange} 
+          <input
+            type="text"
+            value={currName}
+            onChange={(e) => updateNodeField(id, "inputName", e.target.value)}
           />
         </label>
-        <label>
+        <label style={{ display: "block" }}>
           Type:
-          <select value={inputType} onChange={handleTypeChange}>
+          <select
+            value={inputType}
+            onChange={(e) => updateNodeField(id, "inputType", e.target.value)}
+          >
             <option value="Text">Text</option>
             <option value="File">File</option>
           </select>
         </label>
       </div>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id={`${id}-value`}
-      />
-    </div>
+    </BaseNode>
   );
-}
+};
