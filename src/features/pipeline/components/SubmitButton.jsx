@@ -7,10 +7,14 @@ import { submitPipelineTopology } from "../services/pipelineApi";
 export const SubmitButton = () => {
   const { getNodes, getEdges } = useReactFlow();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handlePipelineSubmission = async () => {
     if (isSubmitting) return;
 
+    setErrorMessage("");
+    setStatusMessage("Analyzing graph topology...");
     setIsSubmitting(true);
     try {
       const activeNodes = getNodes();
@@ -21,7 +25,6 @@ export const SubmitButton = () => {
         activeEdges,
       );
 
-      // Render a highly styled structural breakdown using inline JSX inside the toast
       toast.success(
         () => (
           <div className="flex flex-col gap-1 text-xs text-gray-700">
@@ -49,37 +52,58 @@ export const SubmitButton = () => {
           </div>
         ),
         { duration: 6000 },
-      ); // Kept open longer so users can read metrics comfortably
+      );
+      setStatusMessage("Analysis complete.");
     } catch (error) {
       console.error("Pipeline processing crash:", error);
 
-      const errorMessage =
-        error.response?.data?.detail ||
-        error.message ||
-        "Could not establish connection with FastAPI engine.";
-
-      // Display clean error popup
-      toast.error(`Submission Failed: ${errorMessage}`, { duration: 4000 });
+      const message =
+        error.message || "Could not establish connection with FastAPI engine.";
+      setErrorMessage(message);
+      setStatusMessage("Analysis failed.");
+      toast.error(`Submission Failed: ${message}`, { duration: 4000 });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="submit-shell flex items-center justify-center p-4">
+    <div className="submit-shell flex flex-col items-center justify-center p-4">
       <button
         type="button"
         disabled={isSubmitting}
         onClick={handlePipelineSubmission}
-        className={`px-6 py-2 text-white text-xs font-semibold rounded shadow transition-all duration-150
+        /* 
+          UPDATED HOVER UTILITIES: 
+          - hover:-translate-y-0.5 & hover:scale-105: Gives tactile 3D movement
+          - hover:shadow-lg: Enhances depth contrast
+          - duration-200 ease-out: Smooths the transition framework
+        */
+        className={`px-6 py-2.5 text-white text-xs font-semibold rounded shadow-md transform transition-all duration-200 ease-out
           ${
             isSubmitting
-              ? "bg-gray-400 cursor-not-allowed opacity-70"
-              : "bg-brand hover:bg-brand-strong active:scale-95"
+              ? "bg-gray-400 cursor-not-allowed opacity-70 pointer-events-none shadow-none translate-y-0 scale-100"
+              : "bg-slate-900 hover:bg-slate-800 hover:-translate-y-0.5 hover:scale-105 hover:shadow-lg active:scale-95 active:translate-y-0"
           }`}
       >
         {isSubmitting ? "Processing Graph..." : "Submit Pipeline"}
       </button>
+
+      <div className="text-center min-h-[20px] mt-2">
+        {statusMessage && (
+          <p
+            className="text-xs text-slate-600 animate-pulse"
+            aria-live="polite"
+          >
+            {statusMessage}
+          </p>
+        )}
+        {errorMessage && (
+          <p className="text-xs font-medium text-red-600" aria-live="polite">
+            {errorMessage}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

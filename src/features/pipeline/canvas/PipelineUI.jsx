@@ -11,6 +11,7 @@ const proOptions = { hideAttribution: true };
 export const PipelineUI = () => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const nodes = useStore((state) => state.nodes);
   const edges = useStore((state) => state.edges);
@@ -28,6 +29,7 @@ export const PipelineUI = () => {
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
+      setIsDragOver(false);
 
       if (
         event?.dataTransfer?.getData("application/reactflow") &&
@@ -63,11 +65,22 @@ export const PipelineUI = () => {
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
+    setIsDragOver(true);
     event.dataTransfer.dropEffect = "move";
   }, []);
 
+  const onDragLeave = useCallback((event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDragOver(false);
+    }
+  }, []);
+
   return (
-    <div ref={reactFlowWrapper} className="canvas-shell">
+    <div
+      ref={reactFlowWrapper}
+      className={`canvas-shell ${isDragOver ? "drag-over" : ""}`}
+      onDragLeave={onDragLeave}
+    >
       <ReactFlow
         nodes={nodes}
         edges={edges}

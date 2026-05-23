@@ -14,6 +14,10 @@
   --color-border: #d1d5db;
 }
 
+:root {
+  --ease-ui: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 @layer base {
   body {
     margin: 0;
@@ -45,10 +49,33 @@
 
   .drag-node {
     @apply flex h-16 min-w-24 cursor-grab flex-col items-center justify-center gap-1 rounded-lg bg-brand px-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 active:cursor-grabbing;
+    transition:
+      transform 160ms var(--ease-ui),
+      box-shadow 160ms var(--ease-ui),
+      filter 160ms var(--ease-ui);
+  }
+
+  .drag-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.14);
+  }
+
+  .drag-node:active {
+    transform: translateY(0);
   }
 
   .canvas-shell {
     @apply mt-4 h-[70vh] w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm;
+    transition:
+      border-color 180ms var(--ease-ui),
+      box-shadow 180ms var(--ease-ui),
+      background-color 180ms var(--ease-ui);
+  }
+
+  .canvas-shell.drag-over {
+    border-color: #94a3b8;
+    box-shadow: 0 0 0 3px rgb(148 163 184 / 0.24);
+    background-color: #f8fafc;
   }
 
   .submit-shell {
@@ -57,10 +84,31 @@
 
   .btn-primary {
     @apply rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-strong;
+    transition:
+      transform 160ms var(--ease-ui),
+      box-shadow 160ms var(--ease-ui),
+      background-color 160ms var(--ease-ui);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgb(28 37 54 / 0.2);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
   }
 
   .node-card {
     @apply relative w-55 min-h-20 overflow-hidden rounded-lg border border-border bg-surface shadow-sm;
+    transition:
+      box-shadow 180ms var(--ease-ui),
+      border-color 180ms var(--ease-ui);
+  }
+
+  .node-card:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 8px 24px rgb(15 23 42 / 0.12);
   }
 
   .node-head {
@@ -81,5 +129,21 @@
 
   .field-input {
     @apply w-full rounded-md border border-border bg-white px-2 py-1.5 text-xs outline-none ring-0 transition focus:border-slate-500;
+  }
+
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  .drag-node:focus-visible {
+    outline: 2px solid #334155;
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }
