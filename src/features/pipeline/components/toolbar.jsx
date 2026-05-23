@@ -1,6 +1,6 @@
 // toolbar.js
 
-import { DraggableNode } from './draggableNode';
+import { DraggableNode } from '../../nodes/components/draggableNode';
 
 export const PipelineToolbar = () => {
 
